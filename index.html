@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Sport Car</title>
+
+
+</head>
+<body>
+  
+
+
+
+
+    
+    <header>
+        <img src="logo.png" alt="Logo do Sport Car">
+        <nav>
+            <ul>
+                <li>Inicio</li>
+                <li>Sobre</li>
+                <li>Carros</li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="video-background">
+        <video autoplay muted loop id="bg-video">
+            <source src="video.mp4" type="video/mp4">
+            <!-- Formatos alternativos para melhor compatibilidade -->
+            <source src="video.mp4" type="video/webm">
+            <!-- Fallback para navegadores que não suportam vídeo -->
+            Seu navegador não suporta vídeos HTML5.
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+    <section>
+        <div class="list">
+            <div class="item active" id="car1">
+                <div class="imagem-carros">
+                    <img src="2.png" alt="Carro 1">
+                </div>
+                <div class="content">
+                    <h2>Ferrari</h2>
+                    <p class="car-information">
+                        <strong>Modelo:</strong> Modelo do Carro 1<br>
+                        <strong>Preço:</strong> R$ 100.000,00<br>
+                        <strong>Descrição:</strong> Descrição do Carro 1<br>
+                        <strong>Características:</strong> Características do Carro 1<br>
+                    </p>
+                    <button class="buy" onclick="window.location.href='https://www.ferrari.com/pt-BR'">
+                        Comprar
+                    </button>
+                    <button class="information">
+                        Saiba mais
+                    </button>
+                </div>
+            </div>
+            <div class="item" id="car2">
+                <div class="imagem-carros">
+                    <img src="3.png" alt="Carro 2">
+                </div>
+                <div class="content">
+                    <h2>Lamborghini</h2>
+                    <p class="car-information">
+                        <strong>Modelo:</strong> Modelo do Carro 2<br>
+                        <strong>Preço:</strong> R$ 150.000,00<br>
+                        <strong>Descrição:</strong> Descrição do Carro 2<br>
+                        <strong>Características:</strong> Características do Carro 2<br>
+                    </p>
+                    <button class="buy" onclick="window.location.href='https://www.lamborghini.com/pt'">
+                        Comprar
+                    </button>
+                    <button class="information">
+                        Saiba mais
+                    </button>
+                </div>
+            </div>
+            <div class="item" id="car3">
+                <div class="imagem-carros">
+                    <img src="1.png" alt="Carro 3">
+                </div>
+                <div class="content">
+                    <h2>porshe</h2>
+                    <p class="car-information">
+                        <strong>Modelo:</strong> Modelo do Carro 3<br>
+                        <strong>Preço:</strong> R$ 200.000,00<br>
+                        <strong>Descrição:</strong> Descrição do Carro 3<br>
+                        <strong>Características:</strong> Características do Carro 3<br>
+                    </p>
+                    <button class="buy" onclick="window.location.href='https://www.mclaren.com'">
+                        Comprar
+                    </button>
+                    <button class="information">
+                        Saiba mais
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow">
+            <button aria-label="Próximo carro" id="prevBtn">
+                <img src="arrow.png" alt="Seta para a esquerda">
+            </button>
+            <button aria-label="Carro anterior" id="nextBtn">
+                <img src="arrow.png" alt="Seta para a direita">
+            </button>
+            <div class="indicators">
+                <div class="numbers">2</div>
+                <ul>
+                    <li class="active"></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentCarIndex = 0;
+        const cars = document.querySelectorAll('.item');
+        const indicators = document.querySelectorAll('.indicators li');
+        
+        function showCar(index) {
+            // Esconder todos os carros
+            cars.forEach(car => car.classList.remove('active'));
+
+            // Mostrar o carro atual
+            cars[index].classList.add('active');
+
+            // Atualizar o indicador
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            indicators[index].classList.add('active');
+        }
+
+        // Botão de próximo carro
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            currentCarIndex = (currentCarIndex + 1) % cars.length;
+            showCar(currentCarIndex);
+        });
+
+        // Botão de carro anterior
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            currentCarIndex = (currentCarIndex - 1 + cars.length) % cars.length;
+            showCar(currentCarIndex);
+        });
+
+        // Inicializa o primeiro carro
+        showCar(currentCarIndex);
+    </script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+/* Estilos gerais e reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  /* Header e navegação */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  header img {
+    height: 50px;
+    transition: transform 0.3s ease;
+  }
+  
+  header img:hover {
+    transform: scale(1.05);
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+  }
+  
+  nav li {
+    position: relative;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+  
+  nav li:hover {
+    color: #ff4d4d;
+  }
+  
+  nav li::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #ff4d4d;
+    transition: width 0.3s ease;
+  }
+  
+  nav li:hover::after {
+    width: 100%;
+  }
+  
+  /* Seção principal */
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 7rem 2rem 2rem;
+    position: relative;
+  }
+  
+  /* Lista de carros */
+  .list {
+    width: 100%;
+    max-width: 1200px;
+    height: 70vh;
+    position: relative;
+    perspective: 1000px;
+  }
+  
+  .item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100px) scale(0.8);
+    transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  
+  .item.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0) scale(1);
+  }
+  
+  /* Imagem dos carros */
+  .imagem-carros {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .imagem-carros img {
+    max-width: 90%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
+    transition: transform 0.5s ease;
+    transform-origin: center bottom;
+  }
+  
+  .item.active .imagem-carros img {
+    animation: carEntrance 1s forwards;
+  }
+  
+  @keyframes carEntrance {
+    0% {
+      transform: translateY(50px) scale(0.9);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+  
+  /* Conteúdo do carro */
+  .content {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+  
+  .item.active .content {
+    transform: translateY(0);
+    opacity: 1;
+    transition-delay: 0.3s;
+  }
+  
+  .content h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #ff4d4d, #f9cb28);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 2px;
+  }
+  
+  .car-information {
+    margin-bottom: 2rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+  }
+  
+  .car-information strong {
+    color: #ff4d4d;
+  }
+  
+  /* Botões */
+  button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .buy, .information {
+    padding: 0.8rem 2rem;
+    margin: 0 0.5rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .buy {
+    background: linear-gradient(45deg, #ff4d4d, #f9cb28);
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+  }
+  
+  .information {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+  }
+  
+  .buy:hover, .information:hover {
+    transform: translateY(-3px);
+  }
+  
+  .buy:active, .information:hover {
+    transform: translateY(1px);
+  }
+  
+  .buy::before, .information::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.7s ease;
+  }
+  
+  .buy:hover::before, .information:hover::before {
+    left: 100%;
+  }
+  
+  /* Setas de navegação */
+  .arrow {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    position: absolute;
+    bottom: 10%;
+  }
+  
+  .arrow button {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .arrow button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+  
+  .arrow button img {
+    width: 20px;
+    height: 20px;
+    filter: invert(1);
+  }
+  
+  #prevBtn img {
+    transform: rotate(180deg);
+  }
+  
+  /* Indicadores */
+  .indicators {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .numbers {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ff4d4d;
+  }
+  
+  .indicators ul {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+  }
+  
+  .indicators li {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .indicators li.active {
+    background-color: #ff4d4d;
+    transform: scale(1.2);
+  }
+  
+  /* Animação para troca de carros */
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-100px) scale(0.8);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(100px) scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+  
+  .item.fade-out {
+    animation: fadeOut 0.5s forwards;
+  }
+  
+  .item.fade-in {
+    animation: fadeIn 0.5s forwards;
+  }
+  
+  /* Responsividade */
+  @media (min-width: 768px) {
+    .item {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    
+    .imagem-carros {
+      width: 50%;
+      height: 100%;
+      margin-bottom: 0;
+    }
+    
+    .content {
+      width: 50%;
+      text-align: left;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    header {
+      padding: 1rem;
+    }
+    
+    nav ul {
+      gap: 1rem;
+    }
+    
+    nav li {
+      font-size: 0.9rem;
+    }
+    
+    .content h2 {
+      font-size: 2rem;
+    }
+    
+    .buy, .information {
+      padding: 0.6rem 1.5rem;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .arrow {
+      bottom: 5%;
+    }
+  }
+  
+  /* Animação adicional para o número do indicador */
+  .numbers {
+    position: relative;
+    overflow: hidden;
+    height: 3rem;
+    width: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .numbers::after {
+    content: attr(data-number);
+    position: absolute;
+    animation: numberChange 0.5s ease forwards;
+  }
+  
+  @keyframes numberChange {
+    0% {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Adicionar animação para o fundo */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 77, 77, 0.1), transparent 70%);
+    z-index: -1;
+    animation: pulseBackground 10s infinite alternate;
+  }
+  
+  @keyframes pulseBackground {
+    0% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1.5);
+    }
+  }
+  /* video*/
+  /* Vídeo de fundo */
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+#bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%) translateY(-50%);
+    object-fit: cover;
+    z-index: -1;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 1;
+}
+
+/* Ajuste para garantir que o conteúdo fique acima do vídeo */
+section .list,
+.arrow,
+.indicators {
+    position: relative;
+    z-index: 2;
+}
